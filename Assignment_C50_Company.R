@@ -2,11 +2,21 @@ library(readxl)
 library(caret)
 library(C50)
 
-Clothing<-read.csv("C:/Users/Acer/Downloads/Company_Data.csv")
+Clothing<-read.csv('C:/Users/dhrup/OneDrive/Documents/Datasets/Company_Data.csv')
+#eda
+dim(Clothing)
+summary(Clothing)
+str(Clothing)
+hist(Clothing$Sales)
+boxplot(Clothing$Sales,horizontal = T)
+barplot(Clothing$Sales)
+table(is.na(Clothing))
+
 Sales1<-cut(Clothing$Sales,breaks = 2,labels = F)
 Sales1<-as.factor(Sales1)
 Clothing1<-data.frame(Sales1,Clothing[,-1])
 colnames(Clothing1)
+
 acc<-c()
 for (i in 1:1000) 
   {
@@ -24,5 +34,12 @@ for (i in 1:1000)
 summary(acc)
 plot(tree1)
 summary(tree1)
+#40%  Price
+#38%  ShelveLoc
+#17%  Age
+#5%  Advertising
+#2%  Income
+#2%  US
+#<1%  CompPrice
 
 boxplot(acc)
